@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 
 """Proof of concept gfxdraw example"""
 
