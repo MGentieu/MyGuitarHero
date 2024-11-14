@@ -42,10 +42,19 @@ def main():
     size = screen_width, screen_height
     screen = pygame.display.set_mode(size, pygame.NOFRAME, 0)
     #screen.fill((10, 10, 55))
+    color = (255,255,255)
+    points = [(40,40),(200,200),(40,200)]
+    points2=[(500,40),(700,200),(500,200)]
+    Coordonnees_manche = [(2*screen_width/3, screen_height), (screen_width/3, screen_height), 
+                          (2*screen_width/5, screen_height/4), (3*screen_width/5, screen_height/4)]
+    texture = pygame.image.load("../microphone.jpg")
 
     DisplayGradient(screen)
-    pygame.gfxdraw.textured_polygon(screen, triangy, red1, offx1[0], offx1[1])
-    pygame.gfxdraw.textured_polygon(screen, triangy1, blue, offx2[0], offx2[1])
+    #pygame.gfxdraw.filled_polygon(screen, points, color)
+    #pygame.gfxdraw.textured_polygon(screen, points2, texture, -50, -50)
+    #pygame.gfxdraw.filled_polygon(screen, Coordonnees_manche, color)
+    pygame.gfxdraw.textured_polygon(screen, Coordonnees_manche, texture, 0, 0)
+    pygame.display.flip()
     try:
         while True:
             event = pygame.event.wait()
