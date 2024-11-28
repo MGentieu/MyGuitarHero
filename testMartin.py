@@ -67,4 +67,3 @@ def main():
     finally:
         pygame.quit()
         
-main()
