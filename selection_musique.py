@@ -17,7 +17,7 @@ def menu_selection_musique(events):
     
     # Taille et espacement des rectangles
     rect_width, rect_height = 350, 70
-    rect_x = screen_width/2  # Centrer horizontalement
+    rect_x = screen_width/2-rect_width/2  # Centrer horizontalement
     spacing = 40  # Espace entre les rectangles
     start_y = (screen_height - (rect_height * len(choix_musique) + spacing * (len(choix_musique) - 1))) // 2  # Centrer verticalement
     
