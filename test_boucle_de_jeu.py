@@ -1,5 +1,8 @@
 from menu import *
 from header import *
+from selection_musique import *
+
+current_menu = "main_menu"
 
 while running:
     # Poll for events
@@ -8,11 +11,24 @@ while running:
         if event.type == pygame.QUIT:
             running = False
 
-    # Call afficher_menu and check for the quit flag
-    quit_flag = afficher_menu(events)
+    if current_menu == "main_menu":
+        # Call afficher_menu and check for the quit or play flag
+        menu_flag = afficher_menu(events)
 
-    if quit_flag == 10:
-        running = False
+        if menu_flag == 10:  # Quit signal
+            running = False
+
+        elif menu_flag == 20:  # Launch music selection menu
+            current_menu = "music_selection"  # Switch to music selection menu
+
+    elif current_menu == "music_selection":
+        menu_musique_flag=menu_selection_musique(events)
+
+        if menu_musique_flag == 10:  # Quit signal
+            current_menu="main_menu"
+
+        # Call the music selection menu
+        
 
     # Update the display
     pygame.display.flip()
