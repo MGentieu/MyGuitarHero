@@ -7,48 +7,71 @@ def menu_selection_musique(events):
 
     menu_rects = []
 
-    background_image_menu = pygame.image.load("image/Fond_Menu_2.jpg")  # Remplacez par le chemin de votre image
+    background_image_menu = pygame.image.load("image/Fond_Menu_2.jpg")  
 
-    background_image_menu = pygame.transform.scale(background_image_menu, (screen_width, screen_height))  # Redimensionne si nécessaire
+    background_image_menu = pygame.transform.scale(background_image_menu, (screen_width, screen_height))  
 
     screen.blit(background_image_menu, (0, 0))
 
-    font = pygame.font.Font(None, 36)
     
-    # Taille et espacement des rectangles
-    rect_width, rect_height = 350, 70
-    rect_x = screen_width/2-rect_width/2  # Centrer horizontalement
-    spacing = 40  # Espace entre les rectangles
-    start_y = (screen_height - (rect_height * len(choix_musique) + spacing * (len(choix_musique) - 1))) // 2  # Centrer verticalement
+    # Charger la police du menu
+    font = pygame.font.Font("Polices/PressStart2P-Regular.ttf", 30)
+
+    # Charger l'image des boutons vides
+    button_image = pygame.image.load("image/bouton_menu_vide.png")  
+
+    button_image_hover = pygame.image.load("image/bouton_menu_vide_hover.png")
+    button_width, button_height = button_image.get_size()  
+
+
+    
+    # Taille et espacement des boutons
+    spacing=40
+    start_y = (screen_height - (button_height * len(choix_musique) + spacing * (len(choix_musique) - 1))) // 2  # Centrer verticalement
     
     cursor_on_button = False
 
     menu_rects.clear()
-   
-    # Dessiner chaque option de menu
-    for i, option in enumerate(choix_musique):
-        # Calculer la position de chaque rectangle
-        rect_y = start_y + i * (rect_height + spacing)
-        
-        # Dessiner le rectangle
-        rect = pygame.Rect(rect_x, rect_y, rect_width, rect_height)
-        pygame.draw.rect(screen, "GRAY", rect)
 
-        if rect.collidepoint(pygame.mouse.get_pos()):
-            pygame.draw.rect(screen, "WHITE", rect)  # Couleur de survol
-            pygame.draw.rect(screen, "BLACK", rect, 3)
-            cursor_on_button = True  # Curseur "main" pour le survol
+
+    for i, option in enumerate(choix_musique):
+        # Calculer la position de chaque bouton
+        rect_x = screen_width / 2 - button_width / 2  # Centrer horizontalement
+        rect_y = start_y + i * (button_height + spacing)
+
+        # Dessiner le bouton (image)
+        # screen.blit(button_image, (rect_x, rect_y))
+
+        is_hovered = pygame.Rect(rect_x, rect_y, button_width, button_height).collidepoint(pygame.mouse.get_pos())
+
+
+        if is_hovered:
+            screen.blit(button_image_hover, (rect_x, rect_y))  # Image de hover
+            cursor_on_button = True  # Active le curseur "main"
         else:
-            pygame.draw.rect(screen, "GRAY", rect)  # Couleur par défaut
-            
+            screen.blit(button_image, (rect_x, rect_y)) 
+
+        # Rendre le texte et le centrer dans l'image du bouton
+        text_surface = font.render(option.upper(), True, "WHITE")
+        if is_hovered:
+            # Ajuster la position du texte pour l'image hover
+            text_rect = text_surface.get_rect(center=(rect_x + button_width // 2, rect_y + button_height // 2))  
+        else:
+             # Position du texte pour l'image normale
+            text_rect = text_surface.get_rect(center=(rect_x + button_width // 2, (rect_y + button_height // 2)-10))
         
-        # Rendre le texte et le centrer dans le rectangle
-        text_surface = font.render(option, True, "BLACK")
-        text_rect = text_surface.get_rect(center=(rect_x + rect_width // 2, rect_y + rect_height // 2))
         screen.blit(text_surface, text_rect)
 
+        # Créer un rectangle pour détecter les clics
+        rect = pygame.Rect(rect_x, rect_y, button_width, button_height)
         menu_rects.append(rect)
 
+        # Changer le curseur si la souris survole un bouton
+        # if rect.collidepoint(pygame.mouse.get_pos()):
+        #     cursor_on_button = True
+        # else:
+        #     cursor_on_button = False
+   
 
         # Process events passed to the function
     for event in events:

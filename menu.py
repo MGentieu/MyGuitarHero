@@ -59,28 +59,7 @@ def afficher_menu(events):
 
         # Ajouter le rectangle à la liste pour gestion des clics
         menu_rects.append(button_rect)    
-    # for i, option in enumerate(menu_options):
-    #     # Calculer la position de chaque rectangle
-    #     rect_y = start_y + i * (rect_height + spacing)
-        
-    #     # Dessiner le rectangle
-    #     button_rect = pygame.Rect(rect_x, rect_y, rect_width, rect_height)
-
-    #     # Draw button with hover effect
-    #     if button_rect.collidepoint(pygame.mouse.get_pos()):
-    #         screen.blit(button_hover_image, (rect_x, rect_y))
-    #         cursor_on_button = True
-    #     else:
-    #         screen.blit(button_image, (rect_x, rect_y))
-            
-        
-    #     # Rendre le texte et le centrer dans le rectangle
-    #     text_surface = font.render(option, True, "BLACK")
-    #     text_rect = text_surface.get_rect(center=(rect_x + rect_width // 2, rect_y + rect_height // 2))
-    #     screen.blit(text_surface, text_rect)
-
-    #     menu_rects.append(button_rect)
-
+   
 
         # Process events passed to the function
     for event in events:
