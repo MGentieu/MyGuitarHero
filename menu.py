@@ -27,10 +27,10 @@ def afficher_menu(events):
         "Quitter": pygame.image.load("image/bouton_quit_menu.png"),
     }
     button_hover_images = {
-        "Commencer le jeu": pygame.image.load("image/bouton_play_menu.png"),
-        "Options": pygame.image.load("image/bouton_option_menu.png"),
-        "Instructions": pygame.image.load("image/bouton_quit_menu.png"),
-        "Quitter": pygame.image.load("image/bouton_quit_menu.png"),
+        "Commencer le jeu": pygame.image.load("image/bouton_play_menu_hover.png"),
+        "Options": pygame.image.load("image/bouton_option_menu_hover.png"),
+        "Instructions": pygame.image.load("image/bouton_quit_menu_hover.png"),
+        "Quitter": pygame.image.load("image/bouton_quit_menu_hover.png"),
     }
     rect_width, rect_height = 350, 150
     
@@ -52,7 +52,7 @@ def afficher_menu(events):
 
         # Vérifier le survol
         if button_rect.collidepoint(pygame.mouse.get_pos()):
-            screen.blit(pygame.transform.scale(button_images[option], (rect_width, rect_height)), (rect_x, rect_y))
+            screen.blit(pygame.transform.scale(button_hover_images[option], (rect_width, rect_height)), (rect_x, rect_y))
             cursor_on_button = True
         else:
             screen.blit(pygame.transform.scale(button_images[option], (rect_width, rect_height)), (rect_x, rect_y))
