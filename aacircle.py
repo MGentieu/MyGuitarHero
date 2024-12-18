@@ -1,5 +1,4 @@
 
-"""Proof of concept gfxdraw example"""
 
 import pygame
 import pygame.gfxdraw

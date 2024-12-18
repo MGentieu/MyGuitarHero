@@ -1,0 +1,3 @@
+import testMartin
+
+testMartin.main()
