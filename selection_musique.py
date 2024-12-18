@@ -66,13 +66,8 @@ def menu_selection_musique(events):
         rect = pygame.Rect(rect_x, rect_y, button_width, button_height)
         menu_rects.append(rect)
 
-        # Changer le curseur si la souris survole un bouton
-        # if rect.collidepoint(pygame.mouse.get_pos()):
-        #     cursor_on_button = True
-        # else:
-        #     cursor_on_button = False
+ 
    
-
         # Process events passed to the function
     for event in events:
         if event.type == pygame.MOUSEBUTTONDOWN:
