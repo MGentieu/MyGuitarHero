@@ -73,11 +73,11 @@ def menu_selection_musique(events):
         if event.type == pygame.MOUSEBUTTONDOWN:
             mouse_pos = pygame.mouse.get_pos()  # Get mouse position
             if menu_rects[0].collidepoint(mouse_pos):  # 
-                print("Lancer la musique 1") # 
+                return 1 # 
             elif menu_rects[1].collidepoint(mouse_pos):  # 
-                print("Lancer la musique 2")  # 
+                return 2  # 
             elif menu_rects[2].collidepoint(mouse_pos):  # 
-                print("Lancer la musique 3")
+                return 3
             elif menu_rects[3].collidepoint(mouse_pos):  # 
                 return 10  # 
 

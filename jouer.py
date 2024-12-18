@@ -1,6 +1,6 @@
 from header import *  # Assure que header.py contient les constantes et initialisations nécessaires
 
-def afficher_aide(events):
+def jouer(events,choix_musique):
     # Charger l'image de fond
     background_image_menu = pygame.image.load("image/Fond_Menu_2.jpg")
     background_image_menu = pygame.transform.scale(background_image_menu, (screen_width, screen_height))
@@ -12,10 +12,7 @@ def afficher_aide(events):
 
     # Texte d'aide
     aide_text = (
-        "Bienvenue sur MyGuitarHero, le guitar hero version ECE. "
-        "Si vous ne connaissez pas deja le jeu culte, il s'agit d'un jeu de rythme endiablé! "
-        "Choissisez votre musique, et c'est parti! Des note tombent en rythme, et il vous faut cliquer au moment ou elle traversent la ligne de controle pour valider la note. "
-        "Amusez vous bien, et devenez le prochain Prince!"
+        f"Sous programme de jeu de la musique {choix_musique}"
     )
 
     # Taille et position du rectangle contenant l'aide

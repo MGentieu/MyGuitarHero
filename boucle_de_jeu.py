@@ -2,6 +2,7 @@ from menu import *
 from header import *
 from selection_musique import *
 from aide import *
+from jouer import *
 
 current_menu = "main_menu"
 
@@ -31,6 +32,9 @@ while running:
         if menu_musique_flag == 10:  # Quit signal
             current_menu="main_menu"
 
+        elif menu_musique_flag in [1, 2, 3]:  # Lancer une musique spécifique
+            current_menu = "jeu"  # Change l'état pour lancer le jeu
+
         # Call the music selection menu
         
     elif current_menu == "aide":
@@ -38,6 +42,11 @@ while running:
 
         if aide_flag == 10:  # Retour au menu principal
             current_menu = "main_menu"
+    
+    elif current_menu == "jeu":
+        jouer_flag=jouer(events,menu_musique_flag)
+        if jouer_flag == 10:  # Retour au menu selection
+            current_menu = "music_selection"
     # Update the display
     pygame.display.flip()
 
