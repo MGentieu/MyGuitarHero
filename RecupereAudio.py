@@ -29,7 +29,7 @@ def youtube_to_wav(youtube_url, output_folder, title):
 
 # Exemple d'utilisation
 youtube_url = "https://www.youtube.com/watch?v=fox_5DQ8Hz8"
-output_folder = "C:/Users/33695/Music"
+output_folder = "C:/Users/33695/Music" # à personnaliser.
 youtube_url_2="https://www.youtube.com/watch?v=8D0ybTfYmCE"
 youtube_url_3="https://www.youtube.com/watch?v=uajxUDu12kw"
 yt_url4="https://www.youtube.com/watch?v=iC8oP4Z_xPw"
@@ -37,11 +37,11 @@ yt_url5="https://www.youtube.com/watch?v=zdtxioCmtMc"
 yt_url6="https://www.youtube.com/watch?v=h66dI0q_9As"
 yt_url7="https://www.youtube.com/watch?v=KYkm5_fDthc"
 #youtube_to_wav(youtube_url, output_folder, "rush_E.mp4")
-#youtube_to_wav(youtube_url_2, output_folder, "bliss.mp4")
-#youtube_to_wav(youtube_url_3, output_folder, "plug_in_baby.mp4")
-#youtube_to_wav(yt_url4, output_folder, "love_rock_n_roll.mp4")
-#youtube_to_wav(yt_url5, output_folder, "psycho.mp4")
-#youtube_to_wav(yt_url6, output_folder, "take_me_out.mp4")
+youtube_to_wav(youtube_url_2, output_folder, "bliss.mp4")
+youtube_to_wav(youtube_url_3, output_folder, "plug_in_baby.mp4")
+youtube_to_wav(yt_url4, output_folder, "love_rock_n_roll.mp4")
+youtube_to_wav(yt_url5, output_folder, "psycho.mp4")
+youtube_to_wav(yt_url6, output_folder, "take_me_out.mp4")
 youtube_to_wav(yt_url7, output_folder, "plug_in_baby_guitar_only.mp4")
 
 
