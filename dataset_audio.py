@@ -1,51 +1,38 @@
-import pandas as pd
 import librosa
 import numpy as np
-import matplotlib.pyplot as plt
 import pandas as pd
 
 # Charger le fichier audio
-audio_path = 'votre_audio.wav'
+audio_path = "C:/Users/33695/Music/plug_in_baby_guitar_only.wav"
 y, sr = librosa.load(audio_path)
 
-# Définir les fréquences spécifiques que vous souhaitez analyser (par exemple, 1000 Hz à 5000 Hz)
-frequencies_to_analyze = [220.0, 233.1, 246.9, 261.6, 277.2, 293.7, 311.1, 329.6, 349.2, 370.0, 392.0, 415.3, 440.0]
-frequencies_to_analyze = np.linspace(1000, 5000, num=100)  # Plage de fréquences entre 1000 et 5000 Hz
+# Fréquences définies
+frequencies_to_analyze = np.array([220.0, 233.1, 246.9, 261.6, 277.2, 293.7, 311.1, 329.6, 349.2, 370.0, 392.0, 415.3, 440.0])
 
-# Calculer le spectrogramme Constant-Q
-C = librosa.cqt(y, sr=sr, fmin=frequencies_to_analyze[0], n_bins=len(frequencies_to_analyze))
+# Créer un spectrogramme Constant-Q basé sur les fréquences spécifiées
+C = librosa.cqt(
+    y,
+    sr=sr,
+    fmin=frequencies_to_analyze[0],   # Fréquence minimale (la plus basse)
+    n_bins=len(frequencies_to_analyze),  # Nombre de fréquences analysées
+    bins_per_octave=len(frequencies_to_analyze)  # Un bin par fréquence
+)
 
-# Afficher le spectrogramme dans la plage de fréquences définie
-plt.figure(figsize=(10, 6))
-librosa.display.specshow(librosa.amplitude_to_db(C, ref=np.max), y_axis='cqt_hz', x_axis='time', sr=sr)
-plt.colorbar(format='%+2.0f dB')
-plt.title('Spectrogramme Constant-Q (plage de fréquences définie)')
-plt.show()
+# Convertir les amplitudes brutes en décibels
+C_db = librosa.amplitude_to_db(np.abs(C), ref=np.max)
 
-# Exporter les données sous forme de CSV pour analyse
-time_steps = np.arange(C.shape[1])
-freq_steps = frequencies_to_analyze
+# Extraire les amplitudes par échantillon (frame)
+frames = librosa.frames_to_time(np.arange(C_db.shape[1]), sr=sr)
+samples_per_frame = int(len(y) / len(frames))  # Nombre approximatif d'échantillons par frame
 
-# Créer un DataFrame avec les données
-spectrogram_df = pd.DataFrame(C, index=freq_steps, columns=time_steps)
-
-# Sauvegarder les données en CSV
-spectrogram_df.to_csv('spectrogram_data.csv')
-"""
-def load_dataset(input_file):
-    try:
-        df = pd.read_csv(input_file)
-
-        df.describe()
-        print(df.columns)
-
-        return df  
-    
-
-    except Exception as e:
-        print(f"Erreur : {e}")
-        return None
-
-
-load_dataset("C:/Users/33695/Music/test.csv")
-"""
+# Créer un DataFrame avec les amplitudes (frame par frame)
+spectrogram_df = pd.DataFrame(
+    data=C_db, 
+    index=frequencies_to_analyze,  # Les fréquences
+    columns=[f"Frame {i}" for i in range(C_db.shape[1])]  # Une colonne par frame
+)
+#print(spectrogram_df.columns)
+spectrogram_df.describe()
+spectrogram_df.head(100)
+# Exporter en CSV
+#spectrogram_df.to_csv('spectrogram_amplitudes_per_frame.csv', index_label="Frequency (Hz)")
